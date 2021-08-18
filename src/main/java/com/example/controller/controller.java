@@ -36,7 +36,7 @@ public class controller {
 	@Autowired
 	calculateService cs;
 	////資料
-	@PostMapping("/calculate")
+	@PostMapping("/calculatee")
 	@ResponseBody
 	public calculate_result calculate(@RequestBody String str) {
 		return cs.calculate(str); //返回服務層之結果
