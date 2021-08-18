@@ -15,7 +15,7 @@ import com.example.model.calculate_result;
 import com.example.service.calculateService;
 import com.example.service.selectService;
 
-//@CrossOrigin(origins = "*",maxAge = 3600)
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
 public class controller {
 	@GetMapping("/")
