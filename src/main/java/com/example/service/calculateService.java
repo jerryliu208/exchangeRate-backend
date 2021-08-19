@@ -5,15 +5,20 @@ import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.model.calculate_result;
+import com.example.repository.insertDao;
 
 @Service
 public class calculateService {
+	
 	////////////////計算//////////////////
+	@Autowired
+	insertDao iDao;
 	public calculate_result calculate(String data){
 		JSONObject client = new JSONObject(data);
 		JSONObject nation = exRateApi();
@@ -52,6 +57,8 @@ public class calculateService {
 		cr.setPrice(price);
 		cr.setRate(rate);
 		cr.setResult(result);
+		
+		iDao.resultDao(cr);
 		
 		return cr;
 	}
