@@ -48,6 +48,7 @@ public class calculateService {
 				double rate1 = Exrate1.getDouble("Exrate");
 				
 				result = price/(rate/rate1);
+				rate = rate/rate1;
 				break;
 		}
 		
