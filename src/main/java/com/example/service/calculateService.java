@@ -16,7 +16,7 @@ public class calculateService {
 	////////////////計算//////////////////
 	public calculate_result calculate(String data){
 		JSONObject client = new JSONObject(data);
-		JSONObject nation = exchangeRate();
+		JSONObject nation = exRateApi();
 		JSONObject Exrate = new JSONObject();
 		
 		float price = (float)client.getDouble("price");
@@ -33,9 +33,7 @@ public class calculateService {
 				result = price*rate;
 				break;
 			case "TWD":
-				/*JSONObject testJo = exRate.getJSONObject("USDTWD");
-				rate = testJo.getDouble("Exrate");*/
-				result = price;
+				result = price-discount;
 				break;
 			case "JPY":
 				Exrate = nation.getJSONObject("USDJPY");
@@ -58,7 +56,7 @@ public class calculateService {
 		return cr;
 	}
 	
-	public JSONObject exchangeRate() {
+	public JSONObject exRateApi() {
 		String url = "https://tw.rter.info/capi.php";
 		
 		CloseableHttpClient httpClient = HttpClients.custom()
@@ -66,6 +64,7 @@ public class calculateService {
                 .build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setHttpClient(httpClient);
+        
         RestTemplate restTemplate = new RestTemplate(requestFactory);
         String result = restTemplate.getForObject(url, String.class);
 		
